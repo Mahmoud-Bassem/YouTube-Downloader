@@ -9,6 +9,13 @@ pip install .
 sudo apt install ffmpeg  # Ubuntu/Debian
 ```
 
+## Features
+
+- Download individual YouTube videos
+- Download entire playlists
+- Extract audio separately from video
+- Videos download without audio track (use external audio files with any video player)
+
 ## Use Case: Download a Music Video as Audio
 
 1. **Launch the app:**
