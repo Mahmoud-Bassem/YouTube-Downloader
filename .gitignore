@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.dist-info/
+.env
+.venv/
+venv/
+.build/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.cache/
+*.log
+
+# Downloads
+*.mp4
+*.m4a
+*.webm
+
+# Editors/OS
+.DS_Store
+.idea/
+.vscode/

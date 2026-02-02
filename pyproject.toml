@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yt-download"
+version = "0.1.0"
+description = "Simple yt-dlp wrapper for video/audio downloads."
+readme = "README.md"
+requires-python = ">=3.10"
+authors = [{ name = "Mahmoud" }]
+license = { file = "LICENSE" }
+dependencies = ["yt-dlp>=2024.12.23"]
+
+[project.scripts]
+yt-download = "yt_download.cli:main"
+yt-download-gui = "yt_download.gui:main"
+
+[tool.setuptools]
+package-dir = { "" = "src" }
+
+[tool.setuptools.packages.find]
+where = ["src"]
