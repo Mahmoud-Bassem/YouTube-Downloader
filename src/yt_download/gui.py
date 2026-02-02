@@ -59,7 +59,7 @@ class DownloaderGUI:
         dest_frame = tk.Frame(root)
         dest_frame.grid(row=5, column=1, sticky="w", padx=10, pady=10)
         
-        self.dest_var = tk.StringVar(value=str(Path.home() / "Downloads"))
+        self.dest_var = tk.StringVar(value="/media/mahmoud/New Volume1/Curriculum/Vidoes")
         self.dest_label = tk.Label(dest_frame, text=self.dest_var.get(), wraplength=350, justify="left", anchor="w")
         self.dest_label.pack(anchor="w")
         
