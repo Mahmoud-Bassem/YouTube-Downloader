@@ -12,6 +12,8 @@ dist/
 .mypy_cache/
 .cache/
 *.log
+.coverage
+htmlcov/
 
 # Downloads
 *.mp4
