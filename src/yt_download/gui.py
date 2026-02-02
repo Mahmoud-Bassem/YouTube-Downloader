@@ -11,7 +11,7 @@ class DownloaderGUI:
     def __init__(self, root):
         self.root = root
         self.root.title("yt-download")
-        self.root.geometry("550x400")
+        self.root.geometry("600x500")
         self.root.resizable(False, False)
 
         # URL input
@@ -59,7 +59,7 @@ class DownloaderGUI:
         dest_frame = tk.Frame(root)
         dest_frame.grid(row=5, column=1, sticky="w", padx=10, pady=10)
         
-        self.dest_var = tk.StringVar(value="/media/mahmoud/New Volume1/Curriculum/Vidoes")
+        self.dest_var = tk.StringVar(value=str(Path.home() / "Downloads"))
         self.dest_label = tk.Label(dest_frame, text=self.dest_var.get(), wraplength=350, justify="left", anchor="w")
         self.dest_label.pack(anchor="w")
         
@@ -78,30 +78,19 @@ class DownloaderGUI:
         self.status_label = tk.Label(root, textvariable=self.status_var, wraplength=500, justify="left")
         self.status_label.grid(row=8, column=0, columnspan=2, padx=10, pady=10)
 
-    def update_quality_state(self):
-        """Enable/disable quality dropdown based on download type."""
-        if self.download_type.get() == "video":
-            self.quality_combo.config(state="normal")
-        else:
-            self.quality_combo.config(state="disabled")
-
-    def choose_destination(self):
+    def choose_destination(self) -> None:
         folder = filedialog.askdirectory(initialdir=self.dest_var.get())
         if folder:
             self.dest_var.set(folder)
             self.dest_label.config(text=folder)
 
-    def update_quality_state(self):
-        """Enable/disable quality dropdown based on download type."""
-        if self.download_type.get() == "video":
-            self.quality_combo.config(state="normal")
-        else:
-            self.quality_combo.config(state="disabled")
-
-    def start_download(self):
+    def start_download(self) -> None:
         url = self.url_entry.get().strip()
         if not url:
             messagebox.showerror("Error", "Please enter a URL")
+            return
+        if not (url.startswith("http://") or url.startswith("https://")):
+            messagebox.showerror("Error", "Invalid URL. Must start with http:// or https://")
             return
 
         self.download_btn.config(state="disabled")
@@ -109,7 +98,7 @@ class DownloaderGUI:
         self.status_var.set("Starting download...")
         threading.Thread(target=self.download, daemon=True).start()
 
-    def progress_hook(self, d):
+    def progress_hook(self, d: dict) -> None:
         """Progress callback for yt-dlp."""
         if d["status"] == "downloading":
             try:
@@ -132,7 +121,7 @@ class DownloaderGUI:
                 self.status_var.set("Processing...")
             self.root.after(0, finish)
 
-    def download(self):
+    def download(self) -> None:
         try:
             url = self.url_entry.get().strip()
             dest = self.dest_var.get()

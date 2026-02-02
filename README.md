@@ -1,6 +1,15 @@
 # yt-download
 
-Simple CLI wrapper around yt-dlp for grabbing YouTube video or audio. Prioritizes mp4/H.264 for player compatibility and falls back to progressive formats when ffmpeg is missing.
+Simple CLI and GUI wrapper around yt-dlp for downloading YouTube videos and audio.
+
+## Features
+
+- **CLI**: Fast command-line downloads with customizable options
+- **GUI**: User-friendly Tkinter interface with progress tracking
+- Video and audio format selection (mp4, mkv, webm, avi for video; m4a, mp3, wav, aac for audio)
+- Quality selection (360p-2160p)
+- Download video-only, audio-only, or both
+- Real-time progress bar and speed/ETA display
 
 ## Install
 
@@ -17,36 +26,69 @@ pipx install .
 ### From source without installing
 ```bash
 python -m yt_download --help
+python -m yt_download.gui
 ```
 
 ## Usage
 
-Download video with audio (default 1080p cap):
+### CLI
+
+Download single video (1080p, video-only):
 ```bash
-yt-download "https://www.youtube.com/watch?v=VIDEO" 1080
+yt-download "https://www.youtube.com/watch?v=VIDEO_ID"
 ```
 
-Video-only (mute):
+Download with specific quality:
 ```bash
-yt-download "https://www.youtube.com/watch?v=VIDEO" 720 --mute
+yt-download "https://www.youtube.com/watch?v=VIDEO_ID" 720
 ```
 
-Audio-only (m4a when ffmpeg is present):
+Audio-only (requires ffmpeg):
 ```bash
-yt-download "https://www.youtube.com/watch?v=VIDEO" --audio-only
+yt-download "https://www.youtube.com/watch?v=VIDEO_ID" --audio-only
 ```
 
-Custom output template:
+Download just the video, no audio:
 ```bash
-yt-download "https://www.youtube.com/watch?v=VIDEO" --output "%(title)s.%(ext)s"
+yt-download "https://www.youtube.com/watch?v=VIDEO_ID" --mute
 ```
 
-Use browser cookies (helps with age/region restrictions):
+Custom output location and name:
 ```bash
-yt-download "https://www.youtube.com/watch?v=VIDEO" --cookies-from-browser chrome
+yt-download "https://www.youtube.com/watch?v=VIDEO_ID" --output "/path/to/%(title)s.%(ext)s"
 ```
+
+Use browser cookies (for age/region restrictions):
+```bash
+yt-download "https://www.youtube.com/watch?v=VIDEO_ID" --cookies-from-browser chrome
+```
+
+### GUI
+
+Launch the GUI:
+```bash
+python -m yt_download.gui
+```
+or if installed:
+```bash
+yt-download-gui
+```
+
+Select download type, quality, format, and destination folder. Progress bar shows real-time stats.
+
+## Requirements
+
+- Python 3.10+
+- yt-dlp
+- ffmpeg (optional, recommended for best quality)
+- Tkinter (included with most Python distributions)
 
 ## Notes
-- ffmpeg is optional but recommended for best-quality muxing and m4a extraction.
+
+- ffmpeg is optional but strongly recommended for quality video/audio extraction and codec conversion.
+- GUI defaults to `~/Downloads` as destination.
+- Video format selection is best-effort; yt-dlp may substitute if exact format unavailable.
+- Audio codec conversion requires ffmpeg.
+
 - Requires Python 3.10+.
 - The quality argument caps video height; defaults to 1080.
