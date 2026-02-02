@@ -12,6 +12,9 @@ authors = [{ name = "Mahmoud" }]
 license = { file = "LICENSE" }
 dependencies = ["yt-dlp>=2024.12.23"]
 
+[project.optional-dependencies]
+dev = ["pytest>=7.0", "pytest-mock>=3.10"]
+
 [project.scripts]
 yt-download = "yt_download.cli:main"
 yt-download-gui = "yt_download.gui:main"
