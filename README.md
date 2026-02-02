@@ -6,8 +6,12 @@ Download YouTube videos and audio with a simple GUI.
 
 ```bash
 pip install .
-sudo apt install ffmpeg  # Ubuntu/Debian
 ```
+
+**Install ffmpeg:**
+- **Ubuntu/Debian:** `sudo apt install ffmpeg`
+- **Windows:** Download from https://ffmpeg.org/download.html or use `choco install ffmpeg`
+- **macOS:** `brew install ffmpeg`
 
 ## Features
 
