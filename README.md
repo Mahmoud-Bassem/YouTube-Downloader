@@ -1,71 +1,44 @@
 # YouTube Downloader
 
-Download YouTube videos and audio via GUI or CLI.
+Download YouTube videos and audio with a simple GUI.
 
-## Install
+## Setup
 
 ```bash
 pip install .
-```
-
-**Recommended:** Install ffmpeg for format conversion
-```bash
 sudo apt install ffmpeg  # Ubuntu/Debian
-brew install ffmpeg      # macOS
 ```
 
-## GUI (Easiest)
+## Use Case: Download a Music Video as Audio
 
-```bash
-python -m yt_download.gui
-```
+1. **Launch the app:**
+   ```bash
+   python -m yt_download.gui
+   ```
 
-1. Paste YouTube URL
-2. Choose: Video Only / Audio Only / Both
-3. Select quality (360p-2160p) and format
-4. Click Download
+2. **Paste the YouTube URL:**
+   - Go to YouTube, find a music video
+   - Copy the URL (e.g., `https://www.youtube.com/watch?v=...`)
+   - Paste into the "Video URL" field
 
-**Change default save path:** Edit `src/yt_download/gui.py` line 66:
-```python
-self.dest_var = tk.StringVar(value="/your/path/here")
-```
+3. **Choose what to download:**
+   - Select **Audio Only**
 
-## CLI
+4. **Pick audio quality:**
+   - **Audio Format:** m4a (best quality, small file)
+   - *(Optional) Video Quality setting is disabled since you chose audio-only*
 
-```bash
-# Default (1080p video-only)
-yt-download "URL"
+5. **Set where to save:**
+   - Click **Browse** to choose a folder
+   - Or use the default path
 
-# Specific quality
-yt-download "URL" 720
+6. **Download:**
+   - Click the green **Download** button
+   - Watch the progress bar
+   - File saves as: `Video Title_audio.m4a`
 
-# Audio only
-yt-download "URL" --audio-only
+## Requires
 
-# Custom output
-yt-download "URL" --output "/path/%(title)s.%(ext)s"
+- Python 3.10+
+- ffmpeg (for format conversion)
 
-# All options
-yt-download --help
-```
-
-## Features
-
-- Video: mp4, mkv, webm, avi | 360p-2160p
-- Audio: m4a, mp3, wav, aac
-- Progress bar with speed/ETA
-- Single video download (playlists: only specific video from URL)
-
-## Tests
-
-```bash
-pytest tests/ -v
-```
-
-## Troubleshooting
-
-**No tkinter:** `sudo apt install python3-tk`  
-**No ffmpeg:** Install ffmpeg (see above)  
-**URL error:** Must start with http:// or https://
-
-Requires Python 3.10+
